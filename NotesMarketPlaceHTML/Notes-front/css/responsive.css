@@ -1,0 +1,459 @@
+@media (min-width: 1200px) and (max-width: 1299px){
+   /*-------forgot------*/
+    
+    #login-form{
+    font-size: 30px;
+    line-height: 38px;
+    margin-bottom: 20px;
+}
+    /*-------signup------*/
+    .logo-signup{
+     -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+}
+
+}
+
+
+/*for medium devices(landscape,tablets)*/
+@media(min-width: 992px) and (max-width: 1199px){
+    
+    /*-------add-note------*/
+    .picture-2 img{
+    margin: 25px 0 0 200px;
+    }
+     /*-------signup------*/
+    .logo-signup{
+     -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+    }
+    /*-------forgot------*/
+    #login-form{
+    font-size: 30px;
+     }
+    .logo-changepwd{
+    -webkit-transform: translateY(25px);
+    transform: translateY(25px);
+    }
+    /*-------buyer request------*/
+    .common-space{
+        padding: 0 15px;
+    }
+    .picture img{
+        margin: 20px 0 0 200px;
+    }
+    /*-----dashboard-----*/
+    .three-box{
+    max-width: 30%;
+    margin-left: 10px;
+    padding-top: 25px;
+}
+    .user-note-details p{
+        margin-left: 50px;
+    }
+    
+    .user-note-details-ans .rate{
+        margin-top: 0;
+        margin-left: 70px;
+    }
+    .user-note-details-ans p{
+        line-height: 16px;
+    }
+    
+    .set-padding-cicis-menu-to-go {
+    padding: 120px 60px;
+}
+    /*-----note-details-----*/
+    #note-details h4{
+        margin-top: 10px;
+    }
+    .red{
+        text-align: left;
+        margin-left: 50px;
+    }
+   
+}
+/*for small devices(small desktop)*/
+@media(min-width:768px) and (max-width:991px){
+    
+    /*-------add-note------*/
+    .picture-2 img{
+    margin: 25px 0 0 140px;
+    }
+    #userprofile{
+        margin-top: 60px;
+    }
+    
+    /*-------signup------*/
+     .logo-signup{
+     -webkit-transform: translateY(30px);
+    transform: translateY(30px);
+   
+    }
+    #userprofile{
+        height: 170px;
+    }
+    #userprofile h3{
+        padding-top: 70px;
+    }
+    .picture img{
+        margin: 20px 0 0 130px;
+    }
+    .customer-info .container{
+       margin-left: 5px;
+    }
+    /*-----dashboard-----*/
+    .three-box{
+    max-width: 30%;
+    margin-left: 5px;
+    padding-top: 25px;
+    margin-left: 10px;
+     }
+    /*-----note-details-----*/
+    .user-note-details p{
+    text-align: left;
+       margin-left: 0;
+    }
+    .user-note-details-ans .rate{
+        
+        margin-top: 0;
+        margin-left: 100px;
+      
+    }
+    .review-box p{
+        font-size: 8px;
+    }
+    
+    .red{
+        text-align: left;
+        margin-left: 0;
+    }
+    .user-note-details,
+    .user-note-details-ans{
+        margin-top: 30px;
+    }
+    
+   
+    }
+
+
+/*for extra small devices(small desktop,portrait tablets)*/
+@media(max-width: 768px) {
+    /*-----buyer request-----*/
+     #buyer-request input{
+        float: left;
+    }
+    #buyer-request button{
+        float: none;
+    }
+    /*-----my download-----*/
+     #my-downloads input{
+        float: left;
+    }
+    #my-downloads button{
+        float: none;
+    }
+    .earning-border,
+    .dashboard-border-2,
+    .dashboard-border-1{
+        margin-bottom: 20px;
+    }
+    .dashboard-details input
+    {
+    float: left;
+    }
+    .dashboard-details button{
+       float: none; 
+    }
+    /*-----note-details-----*/
+    .user-note-details p{
+    text-align: left;
+       margin-left: 0;
+    }
+    .user-note-details,
+    .user-note-details-ans{
+        margin-top: 30px;
+    }
+    .user-note-details-ans .rate{
+        -webkit-transform: translateY(-11px); 
+        transform: translateY(-11px);
+        margin-left: 100px;
+    }
+    .red{
+        text-align: left;
+        margin-left: 0;
+    }
+    .review-box p{
+        margin-top: 20px;
+    }
+    .review-123{
+        font-size: 15px;
+    }
+}
+
+/*extra small devices*/
+@media(max-width: 480px){
+    .picture-2 img{
+    margin: 25px 0 0 210px;
+    }
+    
+     /*-------signup------*/
+     .logo-signup{
+     -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+   
+}
+    /*-------add note------*/
+    #userprofile{
+        height: 180px;
+        margin-top: 50px;
+    }
+    #userprofile h3{
+        padding-top: 70px;
+    }
+    #footer h3{
+        text-align: center;
+    }
+    .icon-list{
+        float: none;
+    }
+    table{
+        font-size: 15px;
+    }
+    .common-space{
+        padding: 0 20px;
+    }
+    #buyer-request input{
+        float: left;
+    }
+    #buyer-request button{
+        float: none;
+    }
+    /*-----contact-us-----*/
+    .btn-contact{
+        margin-top: 20px;
+    }
+    /*----userprofile----*/
+    .picture img{
+        margin: 20px 0 0 200px;
+    }
+    /*----my-download----*/
+    #my-downloads input{
+        float: left;
+    }
+    #my-downloads button{
+        float: none;
+    }
+    /*----home----*/
+    #home{
+    height: 300px;
+    }
+    #home h2{
+    font-size: 30px;
+    margin-top: 100px;
+    }
+    #home p{
+    font-size: 14px;
+    margin-top: 10px;
+    }
+    .horizontal-heading h5{
+        font-size: 30px;
+    }
+    #home-about-2 h3 {
+        font-size: 25px;
+    }
+    #home-about-2 h4{
+        font-size: 20px;
+    }
+    #home-about-2 p{
+        font-size: 14px;
+    }
+    .customer-heading h5{
+        font-size: 25px;
+    }
+    .customer-info p span{
+        font-size: 15px;
+    }
+    .customer-info p i{
+        font-size: 15px;
+    }
+    #home-logo-2{
+        margin-top: 20px;
+    }
+    .customer-info .container{
+       margin-left: 5px;
+    }
+    .three-box{
+        margin-top: 20px;
+    }
+    /*-----note-details-----*/
+    .user-note-details p{
+    text-align: left;
+      
+    }
+    .user-note-details-ans .rate{
+        margin-left: 70px;
+      
+    }
+    .earning-border{
+        text-align: center;
+    }
+     
+}
+
+
+
+
+@media(max-width: 320px){
+    
+    .login-label label {
+    font-size: 13px;
+    font-weight: 200;
+    line-height: 10px;
+    color: #333333;
+    }
+    .password-input img { 
+    position: absolute;
+    top: 30px; 
+    right: 5px;
+    }
+     ::placeholder{
+        font-size: 12px;
+    }
+    .bg-white p{
+    font-size: 13px;
+     }
+     #logo img{
+        width: 200px;
+    }
+    .login-check-label {
+    font-size: 13px;
+   
+    }
+    .alreadySign {
+    font-size: 13px;
+     }
+    #check{
+     height: 16px;
+    width: 16px;
+    }
+    #login-form{
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 30px;
+}
+    /*-------add-note------*/
+    .picture-2 img{
+    margin: 25px 0 0 120px;
+    }
+    #login-form-signup{
+    font-size: 18px;
+   /* line-height: 10px;*/
+    margin-bottom: 3px;
+   
+}
+     /*-------forgot------*/
+    
+    .bg-white-fpwd p{
+        font-size: 10px;
+    }
+    .bg-white-fpwd{
+        padding: 10px;
+    }
+    
+   .logo-signup{
+     -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+        
+    }
+    .common-space{
+        padding: 0 20px;
+    }
+     table{
+        font-size: 15px;
+    }
+    #footer h3{
+        text-align: center;
+    }
+    .icon-list{
+        float: none;
+    }
+    /*------email-verification------*/
+    .email-ver{
+        padding: 20px 15px;
+        margin-right: 19px;
+     
+    }
+    .email-ver p span{
+      margin-bottom: 5px;
+    }
+    #home{
+    height: 290px;
+     }
+    #home h2{
+    font-size: 25px;
+    margin-top: 70px;
+     }
+    #home p{
+    font-size: 12px;
+    margin-top: 10px;
+     }
+    .horizontal-heading h5{
+        font-size: 20px;
+    }
+    #home-about-2 h3 {
+        font-size: 22px;
+    }
+    #home-about-2 h4{
+        font-size: 18px;
+    }
+    .customer-heading h5{
+        font-size: 22px;
+    }
+    .customer-info p{
+        font-size: 12px;
+    }
+    .customer-info p span{
+        font-size: 15px;
+    }
+    .customer-info p i{
+        font-size: 12px;
+    }
+    #home-logo-2{
+        margin-top: 15px;
+    }
+    .customer-info .container{
+       margin-left: 4px;
+    }
+    #about-right p{
+        font-size: 12px;
+    }
+    #home-about .content-box-lg{
+    padding: 20px;
+    }
+    /*-----note-details-----*/
+    .user-note-details p{
+     line-height: 26px;
+    }
+    .user-note-details-ans p{
+        line-height: 20px;
+    }
+    .user-note-details-ans .rate{
+        float: right;
+        margin-left: 5px;
+        
+    }
+    .user-note-details-ans .rate:not(:checked) > label {
+    font-size: 25px;
+     }
+    #search-Notes{
+        margin-top: 60px;
+    }
+    .three-box{
+        max-width: 100%;
+        margin-left: 2px;
+    }
+    
+    
+    }
