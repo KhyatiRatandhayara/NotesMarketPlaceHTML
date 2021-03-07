@@ -52,11 +52,9 @@ session_start();
                     </div>
                 </li>
                 <li class="nav-item">
-                    <?php if($_SESSION['login']){?>
-                       
-                        <a href="login.php"><button class="btn btn-nav-login" type="submit"><b>LOGOUT</b></button></a>
-                                <?php }
-                    
+                   <?php if(isset($_SESSION['email'])){?>
+                        <a href="logout.php"><button class="btn btn-nav-login" type="submit"><b>LOGOUT</b></button></a>
+                                <?php } 
                                 else{
                                 ?>
                         <a href="login.php"><button class="btn btn-nav-login" type="submit"><b>LOGIN</b></button></a>
