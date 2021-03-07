@@ -538,7 +538,7 @@ else{
                 <div class="row">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-note" name="save">SAVE</button>
-                        <button type="submit" class="btn btn-note" name="publish" data-toggle="modal" data-target="#exampleModal" disabled>PUBLISH</button>
+                        <button type="submit" class="btn btn-note" name="publish" data-toggle="modal" data-target="#exampleModal">PUBLISH</button>
                     </div>
                 </div>
             </div>
