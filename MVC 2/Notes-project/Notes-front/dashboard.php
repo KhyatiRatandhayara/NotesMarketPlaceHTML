@@ -30,12 +30,12 @@ else{
 if(isset($_POST['search2'])){
      $search_text_2=$_POST['search_text_2'];
    
-    $query_published ="SELECT sellernote.PublishedDate,sellernote.Title,note_categories.Name,reference_data.Value,sellernote.SellingPrice FROM sellernote LEFT JOIN note_categories ON sellernote.Category=note_categories.Category_id LEFT JOIN reference_data ON sellernote.Ispaid=reference_data.Refdata_id WHERE (sellernote.Title LIKE '%$search_text_2%' OR note_categories.Name LIKE '%$search_text_2%' OR sellernote.PublishedDate LIKE '%$search_text_2%' OR reference_data.Value LIKE '%$search_text_2%' OR sellernote.SellingPrice LIKE '%$search_text_2%') AND sellernote.Status=11 AND Seller_id=$user_id";
+    $query_published ="SELECT sellernote.Seller_Note_id,sellernote.PublishedDate,sellernote.Title,note_categories.Name,reference_data.Value,sellernote.SellingPrice FROM sellernote LEFT JOIN note_categories ON sellernote.Category=note_categories.Category_id LEFT JOIN reference_data ON sellernote.Ispaid=reference_data.Refdata_id WHERE (sellernote.Title LIKE '%$search_text_2%' OR note_categories.Name LIKE '%$search_text_2%' OR sellernote.PublishedDate LIKE '%$search_text_2%' OR reference_data.Value LIKE '%$search_text_2%' OR sellernote.SellingPrice LIKE '%$search_text_2%') AND sellernote.Status=11 AND Seller_id=$user_id";
     
     $result_published = mysqli_query($conn, $query_published);
 }
 else{
-      $query_published ="SELECT  sellernote.PublishedDate,sellernote.Title,note_categories.Name,reference_data.Value,sellernote.SellingPrice FROM sellernote JOIN note_categories ON sellernote.Category=note_categories.Category_id LEFT JOIN reference_data ON sellernote.Ispaid=reference_data.Refdata_id WHERE sellernote.Status=11 AND Seller_id=$user_id";
+      $query_published ="SELECT  sellernote.Seller_Note_id,sellernote.PublishedDate,sellernote.Title,note_categories.Name,reference_data.Value,sellernote.SellingPrice FROM sellernote JOIN note_categories ON sellernote.Category=note_categories.Category_id LEFT JOIN reference_data ON sellernote.Ispaid=reference_data.Refdata_id WHERE sellernote.Status=11 AND Seller_id=$user_id";
     
       $result_published = mysqli_query($conn, $query_published);
 }
@@ -255,6 +255,7 @@ else{
                               $category_pub =$row['Name'];
                               $status_pub = $row['Value'];  
                               $price =  $row['SellingPrice']; 
+                               $seller_note_id=$row['Seller_Note_id']; 
                                 
                                       echo "<tr>";
                                       echo "<td> $date_pub</td>";
