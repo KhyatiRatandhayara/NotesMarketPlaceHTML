@@ -129,6 +129,7 @@ if(isset($_POST['submit'])){
                         <?php
                       if($changed_success){
                           echo "your password changed successfully";
+                          header("location:login.php");
                       }
                         ?>
                         </div>
