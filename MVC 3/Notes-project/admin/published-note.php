@@ -105,15 +105,13 @@ else{
                             <select id="seller" class="form-control arrow-down" onchange="publishednote()">
                                 <option selected disabled>Select seller</option>
                                 <?php 
-                                $query_seller_name = "SELECT DISTINCT sellernote.Seller_id,users.FirstName,users.LastName,users.Email,sellernote.Title  FROM sellernote LEFT JOIN users ON sellernote.Seller_id=users.User_id WHERE sellernote.Status=11 AND sellernote.IsActive=1";
+                                $query_seller_name = "SELECT DISTINCT sellernote.Seller_id,users.FirstName,users.LastName FROM sellernote LEFT JOIN users ON sellernote.Seller_id=users.User_id WHERE sellernote.Status=11 AND sellernote.IsActive=1";
                                 $result_seller_name = mysqli_query($conn,$query_seller_name);
                                 
                                 while($row=mysqli_fetch_assoc($result_seller_name)){
                                     $seller_fetch_fname = $row['FirstName'];
                                     $seller_fetch_lname = $row['LastName'];
                                     $seller_id = $row['Seller_id'];
-                                    $seller_email = $row['Email'];
-                                    $title = $row['Title'];
                                     echo "<option value='$seller_id'>$seller_fetch_fname&nbsp;$seller_fetch_lname</option>";
                                 }
                                 ?>
