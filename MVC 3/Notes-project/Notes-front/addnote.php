@@ -578,7 +578,7 @@ header("location:login.php");
 
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <select id="country" class="form-control arrow-down" name="country">
+                            <select id="country" class="form-control arrow-down" name="country" required>
 
                                 <?php
                             if(isset($_GET['id'])){
@@ -615,7 +615,7 @@ header("location:login.php");
                     <div class="col-md-6">
                         <div class="form-group signup">
                             <label for="ins-name">Institude Name</label>
-                            <input type="text" class="form-control" id="ins-name" name="institutename" value="<?php echo $institutename?>" placeholder="Enter your institude name" required>
+                            <input type="text" class="form-control" id="ins-name" name="institutename" value="<?php echo $institutename?>" placeholder="Enter your institude name">
                         </div>
                     </div>
                 </div>
@@ -695,7 +695,7 @@ header("location:login.php");
 
                         <div class="form-group">
                             <label for="sell-price">Sell Price<span class="required">*</span></label>
-                            <input type="number" step="any" class="form-control" id="sell-price" name="sellprice" value="<?php echo $sellprice?>" placeholder="Enter your Price" required>
+                            <input type="number" step="any" class="form-control" id="sell-price" name="sellprice" value="<?php echo $sellprice?>" placeholder="Enter your Price">
                         </div>
                     </div>
                     <div class="col-md-6">
