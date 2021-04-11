@@ -167,11 +167,36 @@ $count_downloaded= mysqli_num_rows($result_downloaded);
 
                             <div class="col-md-6 col-6">
                                 <div class="user-note-details-ans">
-                                    <p><?php echo $institutename?></p>
+                                   <?php if(!empty($institutename) && $institutename=''){ ?>
+                                    <p><?php echo $institutename ?></p>
+                                    <?php } else{ ?>
+                                    <p><?php echo "NULL" ?></p>
+                                    <?php } ?>
+                                    <?php if(!empty($country_name_fetch) && $country_name_fetch=''){ ?>
                                     <p><?php echo $country_name_fetch ?></p>
+                                   <?php } 
+                                    else{
+                                    ?>
+                                   <p><?php echo "NULL" ?></p>
+                                   <?php } ?>
+                                   
+                                   <?php if(!empty($coursename) && $coursename=''){ ?>
                                     <p><?php echo $coursename ?></p>
+                                    <?php } else{ ?>
+                                       <p><?php echo "NULL" ?></p>
+                                    <?php  } ?>
+                                    
+                                     <?php if(!empty($coursecode) && $coursecode=''){ ?>
                                     <p><?php echo $coursecode ?></p>
+                                    <?php } else{ ?>
+                                    <p><?php echo "NULL" ?></p>
+                                    <?php } ?>
+                                    
+                                     <?php if(!empty($professor) && $professor=''){ ?>
                                     <p><?php echo $professor ?></p>
+                                    <?php } else{ ?>
+                                    <p><?php echo "NULL" ?></p>
+                                    <?php } ?>
                                     <p><?php echo $pages ?></p>
                                     <p><?php echo $publisheddate ?></p>
                                     <?php 
