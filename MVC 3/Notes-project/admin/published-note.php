@@ -112,6 +112,7 @@ else{
                                     $seller_fetch_fname = $row['FirstName'];
                                     $seller_fetch_lname = $row['LastName'];
                                     $seller_id = $row['Seller_id'];
+                                   
                                     echo "<option value='$seller_id'>$seller_fetch_fname&nbsp;$seller_fetch_lname</option>";
                                 }
                                 ?>
@@ -130,10 +131,25 @@ else{
     </div>
 
     <?php
+       
+
+    
+    
+    
 if(isset($_POST['unpublishbtn'])){
    $noteid_unpublish = $_POST['noteid_unpublish']; 
    $remark = $_POST['remarks'];
     $query_unpublish = mysqli_query($conn,"UPDATE sellernote SET Status=8,ActionedBy=$admin_user_id,AdminRemarks='$remark' WHERE Seller_Note_id=$noteid_unpublish");
+    
+    
+    $query_fetch = "SELECT sellernote.Seller_Note_id,sellernote.Seller_id,sellernote.Title,users.FirstName,users.LastName,users.Email FROM sellernote LEFT JOIN users ON sellernote.Seller_id=users.User_id";
+$result_fetch = mysqli_query($conn,$query_fetch);
+while($row=mysqli_fetch_assoc($result_fetch)){
+    $title = $row['Title'];
+    $seller_email = $row['Email'];
+    $seller_fname = $row['FirstName'];
+    $seller_lname = $row['LastName'];
+}
     
     require 'phpmailer/Exception.php';
     require 'phpmailer/PHPMailer.php';
@@ -155,7 +171,7 @@ try {
     
     $mail->setFrom($config_email, 'NoteMarketPlace');
 
-    $mail->addAddress($seller_email, $seller_fetch_fname); //receiver 
+    $mail->addAddress($seller_email, $seller_fname."".$seller_lname ); //receiver 
     $mail->addReplyTo($config_email, 'admin');
     
     $mail->IsHTML(true);  
@@ -165,7 +181,7 @@ try {
 Email sent to: $seller_email<br>
 Subject: Sorry! We need to remove your notes from our portal. <br>
 
-Hello $seller_fetch_fname $seller_fetch_lname , <br>
+Hello $seller_fname $seller_lname , <br>
 We want to inform you that, your note $title has been removed from the portal.<br>
 Please find our remarks as below -
 $remark<br>
@@ -176,7 +192,6 @@ Notes Marketplace</b>";
        $mail->AltBody = 'Plain text message body for non-HTML email client. Gmail SMTP email body.';   //Alternate body of email
  
     $mail->send();
-   
 }
 catch (Exception $e) {
     echo "Error in sending email. Mailer Error: {$mail->ErrorInfo}";
