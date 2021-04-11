@@ -114,11 +114,10 @@ else{
                                 $downloaded_date=$row['AttachmentDownloadedDate'];
                                 $note_id = $row['Seller_note_id'];
                                 $downloader = $row['Downloaders'];
-                                $email_id = $row['Email'];
                                 $name = $row['FirstName'];
                                 $phone_no = $row['PhoneNumber'];
                                 $phone_code = $row['CountryCode'];   
-                                
+                                $email_id = $row['Email'];
                             
                              
                                 echo "<tr>";
@@ -165,6 +164,13 @@ else{
     $id = $_GET['id'];
     $query_update = "UPDATE downloads SET SellerAllowedDownload=1 WHERE Seller_note_id=$id";
     $result_update = mysqli_query($conn,$query_update);
+        
+    $query_buyer_email = mysqli_query($conn,"SELECT downloads.Downloaders,users.Email,users.FirstName,users.LastName FROM downloads LEFT JOIN users ON downloads.Downloaders=users.User_id WHERE Seller_note_id=$id");
+        while($row=mysqli_fetch_assoc($query_buyer_email)){
+            $buyer_email = $row['Email'];
+            $buyer_fname = $row['FirstName'];
+            $buyer_lname = $row['LastName'];
+        }
     
      require 'phpmailer/Exception.php';
      require 'phpmailer/PHPMailer.php';
@@ -186,19 +192,19 @@ else{
 
      $mail->setFrom($email,'NotesMarketPlace');
 
-     $mail->addAddress($email_id,$user_firstname.''.$user_lastname); //receiver
-     $mail->addReplyTo($email,$name);
+     $mail->addAddress($buyer_email,$buyer_fname.''.$buyer_lname); //receiver
+     $mail->addReplyTo($email,'sender');
          
 
      $mail->IsHTML(true);
      $mail->Subject = "Send email using Gmail SMTP and PHPMailer";
 
      $mail->Body ="<b>Email from:$email<br>
-    Email sent to: $email_id<br>
-        Subject: $name Allows you to download a note<br>
+    Email sent to: $buyer_email<br>
+        Subject: sender Allows you to download a note<br>
             Body:
-            Hello $user_firstname $user_lastname<br>,
-                We would like to inform you that,  Allows you to download a note.
+            Hello $buyer_fname $buyer_lname<br>,
+                We would like to inform you that, Allows you to download a note.
                     Please login and see My Download tabs to download particular note.
                     Regards,
                     Notes Marketplace</b>";
