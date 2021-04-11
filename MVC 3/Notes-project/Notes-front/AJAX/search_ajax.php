@@ -124,7 +124,7 @@ $row_db = mysqli_fetch_row($pagination_result);
                            
                             <img src="image/Search/university.png" alt="university">
                             <?php 
-                        if(!empty($institutename)){
+                        if(!empty($institutename) && $institutename=''){
                           echo "<h6 class='result-data'>$institutename </h6>";  
                         }
                         else{
