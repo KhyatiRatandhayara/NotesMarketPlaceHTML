@@ -555,7 +555,7 @@ header("location:login.php");
 
                         <div class="form-group">
                             <label for="pages">Pages</label>
-                            <input type="text" class="form-control" id="pages" name="pages" value="<?php echo $pages?>" placeholder="Enter Number Of Pages">
+                            <input type="text" class="form-control" id="pages" name="pages" value="<?php echo $pages?>" placeholder="Enter Number Of Pages" required>
                         </div>
                     </div>
                 </div>
