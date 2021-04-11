@@ -75,7 +75,7 @@ if(isset($_GET['id'])){
        $sellprice = $_POST['sellprice'];
     
     
-     $query ="UPDATE sellernote SET Title='$title',Category=$category,NoteType=$type,NumberofPages=$pages,Description='$description',UniversityName='$institutename', Country=$country, Course='$coursename', CourseCode=$coursecode,Professor='$professor',IsPaid=$radio, SellingPrice='$sellprice' WHERE Seller_Note_id=$publish_id";
+     $query ="UPDATE sellernote SET Title='$title',Category=$category,NoteType=$type,NumberofPages='$pages',Description='$description',UniversityName='$institutename', Country=$country, Course='$coursename', CourseCode='$coursecode',Professor='$professor',IsPaid=$radio, SellingPrice='$sellprice' WHERE Seller_Note_id=$publish_id";
 
          $result = mysqli_query($conn,$query);
          if(!$result){
@@ -102,11 +102,11 @@ if(isset($_GET['id'])){
     if(!is_dir('../Members/'. $seller_id)){
     mkdir('../Members/'. $seller_id);
     }
-    if(!is_dir('../Members/'. $seller_id. '/' .$seller_note_id)){
-    mkdir('../Members/'. $seller_id. '/' .$seller_note_id);
+    if(!is_dir('../Members/'. $seller_id. '/' .$publish_id)){
+    mkdir('../Members/'. $seller_id. '/' .$publish_id);
     }
 
-    $destinationfile1 ='../Members/' .$seller_id. '/' .$seller_note_id. '/' .'DP_'.time(). '.' .$filecheck1;
+    $destinationfile1 ='../Members/' .$seller_id. '/' .$publish_id. '/' .'DP_'.time(). '.' .$filecheck1;
 
     move_uploaded_file($filetmp1,$destinationfile1);
 
@@ -134,11 +134,11 @@ if(isset($_GET['id'])){
         if(!is_dir('../Members/' .$seller_id)){
             mkdir('../Members/' .$seller_id);
         }
-        if(!is_dir('../Members/' .$seller_id. '/' .$seller_note_id)){
-            mkdir('../Members/' .$seller_id. '/' .$seller_note_id);
+        if(!is_dir('../Members/' .$seller_id. '/' .$publish_id)){
+            mkdir('../Members/' .$seller_id. '/' .$publish_id);
         }
             
-       $destinationfile3 ='../Members/' .$seller_id. '/' .$seller_note_id. '/' .'Preview_'.time(). '.'.$filecheck3;
+       $destinationfile3 ='../Members/' .$seller_id. '/' .$publish_id. '/' .'Preview_'.time(). '.'.$filecheck3;
         
            move_uploaded_file($filetmp3,$destinationfile3);
            $query_preview = "update sellernote set NotesPreview='$destinationfile3' where Seller_Note_id=$publish_id";
@@ -162,7 +162,7 @@ if(isset($_GET['id'])){
         
          if(in_array($filecheck2, $fileextstored2)){
              
-               $query_multiple="INSERT INTO sellernotesattachments(Seller_note_id,CreatedDate,IsActive) VALUES($seller_note_id,NOW(),1)";
+               $query_multiple="INSERT INTO sellernotesattachments(Seller_note_id,CreatedDate,IsActive) VALUES($publish_id,NOW(),1)";
                $result_multiple = mysqli_query($conn,$query_multiple);
                $attatchment_id = mysqli_insert_id($conn);
              
@@ -172,20 +172,20 @@ if(isset($_GET['id'])){
             if(!is_dir('../Members/' .$seller_id)){
             mkdir('../Members/' .$seller_id);
             }
-            if(!is_dir('../Members/' .$seller_id. '/' .$seller_note_id)){
-            mkdir('../Members/' .$seller_id. '/' .$seller_note_id);
+            if(!is_dir('../Members/' .$seller_id. '/' .$publish_id)){
+            mkdir('../Members/' .$seller_id. '/' .$publish_id);
             }
-            if(!is_dir('../Members/' .$seller_id. '/' .$seller_note_id. '/' .'Attachements')){
-                mkdir('../Members/' .$seller_id. '/' .$seller_note_id. '/' .'Attachements');
+            if(!is_dir('../Members/' .$seller_id. '/' .$publish_id. '/' .'Attachements')){
+                mkdir('../Members/' .$seller_id. '/' .$publish_id. '/' .'Attachements');
             }
              
-            $destinationfile2 ='../Members/' .$seller_id. '/' .$seller_note_id. '/' .'Attachements/' .$attatchment_id. '_' .time().'.'.$filecheck2;
+            $destinationfile2 ='../Members/' .$seller_id. '/' .$publish_id. '/' .'Attachements/' .$attatchment_id. '_' .time().'.'.$filecheck2;
              
         
          move_uploaded_file($_FILES['uploadnotes']['tmp_name'][$i],$destinationfile2);
              $attatch_name = $attatchment_id."_".time().$filecheck2;
              
-         $query_attatchment="UPDATE sellernotesattachments SET FileName='$attatch_name',FilePath='$destinationfile2' where Sellattachement_id=$publish_id";
+         $query_attatchment="UPDATE sellernotesattachments SET FileName='$attatch_name',FilePath='$destinationfile2' where Sellattachement_id=$attatchment_id";
 
          $result_attatchment =mysqli_query($conn,$query_attatchment);
          }
@@ -502,7 +502,7 @@ header("location:login.php");
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="category">Category<span class="required">*</span></label>
-                            <select id="category" class="form-control arrow-down" name="category" required>
+                            <select id="category" class="form-control arrow-down" name="category">
 
                                 <?php
                              if(isset($_GET['id'])){
@@ -578,7 +578,7 @@ header("location:login.php");
 
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <select id="country" class="form-control arrow-down" name="country" required>
+                            <select id="country" class="form-control arrow-down" name="country">
 
                                 <?php
                             if(isset($_GET['id'])){
