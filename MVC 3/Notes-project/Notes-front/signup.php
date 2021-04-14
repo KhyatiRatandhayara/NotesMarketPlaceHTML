@@ -1,7 +1,7 @@
 <?php
 include "connection.php";
 
-
+$success = false;
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -115,7 +115,7 @@ try {
             </tr>
             <tr>
                 <td style='height: 50px;'>
-                <a href='http://localhost/Notes-project/Notes-front/check.php?id=$id'> 
+                <a href='localhost/Notes-project/Notes-front/check.php?id=$id'> 
                 <button
                         style='width: 300px;background-color: #6255a5;height: 35px;border-radius: 3px;font-size: 18px; border:transparent;text-transform: uppercase;color: #fff;line-height: 22px;'>verify
                         email address</button>
@@ -127,6 +127,7 @@ try {
        $mail->AltBody = 'Plain text message body for non-HTML email client. Gmail SMTP email body.';   //Alternate body of email
  
     $mail->send();
+    $success = true;
    
 }
 catch (Exception $e) {
@@ -246,7 +247,11 @@ catch (Exception $e) {
                         </div>
 
                         <button type="submit" class="btn btn-block btn-signup" name="signup">SIGNUP</button>
-
+                        <?php
+                        if($success == true){
+                            echo "<h6 style='color:#6255a5'>your account has been created successfully. please verified your email address  <b>$email</b></h6>";
+                        }
+                        ?>
 
                         <div class="already-account">
                             Already have an account?
