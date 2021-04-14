@@ -285,12 +285,12 @@ $count_downloaded= mysqli_num_rows($result_downloaded);
                                     <p><?php echo $pages ?></p>
                                     <p><?php echo $publisheddate ?></p>
                                     <?php 
-                                 $query_avg=mysqli_query($conn,"SELECT AVG(Rating) FROM sellernotesreviews WHERE Seller_note_id=$seller_id");
+                                 $query_avg=mysqli_query($conn,"SELECT AVG(Rating) FROM sellernotesreviews WHERE Seller_note_id=$seller_id AND IsActive=1");
                                  while($row=mysqli_fetch_assoc($query_avg)){
                                  $avg_rate = $row['AVG(Rating)'];
                                  }
                                     
-                                $query_count = mysqli_query($conn,"SELECT * FROM sellernotesreviews WHERE Seller_note_id=$seller_id");
+                                $query_count = mysqli_query($conn,"SELECT * FROM sellernotesreviews WHERE Seller_note_id=$seller_id AND IsActive=1");
                                 $total_count = mysqli_num_rows($query_count);
                                 ?>
                                     <div class="row">
