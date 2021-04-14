@@ -109,7 +109,7 @@ include "connection.php";
                             $profile_pic = $row['ProfilePicture'];
                         }
                          $count = mysqli_num_rows($result_profile_pic);
-                        if($count > 0){ ?>
+                        if(!empty($profile_pic) && $profile_pic != ""){ ?>
                           <img src="<?php echo $profile_pic ?>" alt="user" class="img-fluid" style='margin-top: 10px;width:40px; height:40px; border-radius:50%'>
                          <?php  }
                           else { ?>
