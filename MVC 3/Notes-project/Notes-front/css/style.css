@@ -378,7 +378,7 @@ section {
     border-radius: 3px;
 }
 .picture>input {
-  opacity: 0;
+ display: none;
 }
 .picture img{
     margin: 25px 0 0 250px;
