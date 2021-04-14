@@ -1,6 +1,7 @@
 <?php 
 include "connection.php";
 session_start();
+$destinationfile1 = "";
 if(isset($_SESSION['email'])){
     $email = $_SESSION['email'];
     $query_email = mysqli_query($conn,"SELECT * FROM users WHERE Email='$email'");
@@ -8,6 +9,18 @@ if(isset($_SESSION['email'])){
        $admin_user_id = $row['User_id']; 
         $firstname = $row['FirstName'];
         $lastname = $row['LastName'];
+    }
+    $sec_email = "";
+    $phone_num = "";
+    $phone_code = "";
+    $display_picture = "";
+    $query_userprofile = mysqli_query($conn,"SELECT * FROM userprofile WHERE User_id=$admin_user_id");
+    $count_userprofile=mysqli_num_rows($query_userprofile);
+    while($row=mysqli_fetch_assoc($query_userprofile)){
+        $sec_email = $row['SecondaryEmail'];
+        $phone_num = $row['PhoneNumber'];
+        $phone_code = $row['Phonenumber_Countrycode'];
+        $display_picture = $row['ProfilePicture'];
     }
     
     if(isset($_POST['submit'])){
@@ -46,8 +59,6 @@ if(isset($_SESSION['email'])){
     $query_update = mysqli_query($conn,"UPDATE userprofile SET 	SecondaryEmail='$secondary_email',Phonenumber_Countrycode='$phonecode',PhoneNumber='$phoneno',ProfilePicture='$destinationfile1' WHERE User_id=$admin_user_id"); 
     $query_update_name = mysqli_query($conn,"UPDATE users SET FirstName='$firstname',LastName='$lastname' WHERE User_id=$admin_user_id");    
     }
-    
-    
     
 }
 ?>
@@ -113,7 +124,7 @@ if(isset($_SESSION['email'])){
 
                         <div class="form-group">
                             <label for="email">Secondary Email</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your email address" name="secondary_email">
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your email address" name="secondary_email" value="<?php echo $sec_email ?>">
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-5">
@@ -121,12 +132,29 @@ if(isset($_SESSION['email'])){
                                     <label for="phone">Phone No.</label>
                                     <select id="phone" class="form-control  arrow-down" name="phonecode">
                                         <?php 
-                                        $query_fetch = mysqli_query($conn,"SELECT * FROM countries");
+                                        if($count_userprofile==1){
+                                            $query_fetch = mysqli_query($conn,"SELECT * FROM countries");
+                                        while($row=mysqli_fetch_assoc($query_fetch)){
+                                            $phonecode = $row['CountryCode'];
+                                            $phone_id = $row['Country_id'];
+                                            if($phone_id== $phone_code){
+                                               echo "<option value='$phone_id' selected='selected'>+$phonecode</option>"; 
+                                            }
+                                            else{
+                                                 echo "<option value='$phone_id'>+$phonecode</option>";
+                                            }
+                                           
+                                        }
+                                            
+                                        }
+                                   else{
+                                       $query_fetch = mysqli_query($conn,"SELECT * FROM countries");
                                         while($row=mysqli_fetch_assoc($query_fetch)){
                                             $phonecode = $row['CountryCode'];
                                             $phone_id = $row['Country_id'];
                                             echo "<option value='$phone_id'>+$phonecode</option>";
                                         }
+                                   }
                                         ?>
                                     </select>
                                 </div>
@@ -134,7 +162,7 @@ if(isset($_SESSION['email'])){
                             <div class="col-lg-8 col-md-8 col-sm-8 col-7">
                                 <div class="form-group">
                                     <label for="phone"><br></label>
-                                    <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" name="phoneno">
+                                    <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" name="phoneno" value="<?php echo $phone_num ?>">
                                 </div>
                             </div>
                         </div>
@@ -145,7 +173,8 @@ if(isset($_SESSION['email'])){
                                 <label for="file-input">
                                     <img src="image/myprofile/upload-file.png">
                                 </label>
-                                <input id="file-input" type="file" name="profile_pic">
+                                <input id="file-input" type="file" name="profile_pic" value="<?php echo $display_picture ?>">
+                                <div id="profile_pic_name" style="margin-top:-35px"></div>
                             </div>
                         </div>
 
@@ -167,6 +196,17 @@ if(isset($_SESSION['email'])){
 
     <!--custom jquery-->
     <script src="javascript/jquery.min.js"></script>
+    <script>
+    var input3 = document.getElementById("file-input");
+        var infoArea3 = document.getElementById("profile_pic_name");
+        input3.addEventListener("change", showProfileName3);
+
+        function showProfileName3(event) {
+            var input3 = event.srcElement;
+            var fileName3 = input3.files[0].name;
+            infoArea3.textContent = "File name: " + fileName3;
+        }
+    </script>
 
     <!--bootstrap-->
     <script src="javascript/bootstrap/bootstrap.min.js"></script>
