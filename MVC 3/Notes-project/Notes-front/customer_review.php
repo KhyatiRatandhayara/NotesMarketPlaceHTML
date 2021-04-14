@@ -61,7 +61,7 @@ if(isset($_SESSION['email'])){
 
    <div class="container review-box">
        <?php 
-                         $query_review_fetch = mysqli_query($conn,"SELECT  sellernotesreviews.ReviewedByID,users.FirstName,users.LastName,users.User_id,userprofile.ProfilePicture FROM sellernotesreviews LEFT JOIN users ON sellernotesreviews.ReviewedByID=users.User_id LEFT JOIN userprofile ON sellernotesreviews.ReviewedByID=userprofile.User_id WHERE Seller_note_id=$seller_id");
+                         $query_review_fetch = mysqli_query($conn,"SELECT  sellernotesreviews.ReviewedByID,users.FirstName,users.LastName,users.User_id,userprofile.ProfilePicture FROM sellernotesreviews LEFT JOIN users ON sellernotesreviews.ReviewedByID=users.User_id LEFT JOIN userprofile ON sellernotesreviews.ReviewedByID=userprofile.User_id WHERE Seller_note_id=$seller_id AND sellernotesreviews.IsActive=1");
                                 while($row=mysqli_fetch_assoc($query_review_fetch)){
                                     $reviewby_id = $row['ReviewedByID'];
                                      $firstname= $row['FirstName'];
@@ -91,7 +91,7 @@ if(isset($_SESSION['email'])){
                    echo "<h6>$firstname&nbsp;$lastname</h6>"; ?>
 
                    <?php 
-                                 $query_review_customer=mysqli_query($conn,"SELECT * FROM sellernotesreviews WHERE Seller_note_id=$seller_id AND ReviewedByID=$review_user_id");
+                                 $query_review_customer=mysqli_query($conn,"SELECT * FROM sellernotesreviews WHERE Seller_note_id=$seller_id AND ReviewedByID=$review_user_id AND IsActive=1");
                                  while($row=mysqli_fetch_assoc($query_review_customer)){
                                  $review_rate = $row['Rating'];
                                  $comment =$row['Comments'];     
