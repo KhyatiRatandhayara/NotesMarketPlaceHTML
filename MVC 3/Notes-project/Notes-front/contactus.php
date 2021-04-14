@@ -3,7 +3,7 @@ include "connection.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
+$message = false;
 session_start();
 if(isset($_SESSION['email'])){
  $email=$_SESSION['email'];
@@ -91,7 +91,7 @@ if($email != "" && $user_validation && $subject_validation && $des_validation &&
                 $mail->AltBody = 'Plain text message body for non-HTML email client. Gmail SMTP email body.';
 
                 $mail->send();
-
+                $message = true;
                 }
 
                 catch (Exception $e) {
@@ -237,6 +237,11 @@ if($email != "" && $user_validation && $subject_validation && $des_validation &&
                     <div class="col-md-12">
                     
                         <button type="submit" class="btn btn-contact" name="submit">SUBMIT</button>
+                        <?php
+                        if($message==true){
+                            echo "<h3 style='color:#6255a5;'>your feedback send successfully!</h3>";
+                        }
+                        ?>
                     </div>
                 </div>
             </form>
