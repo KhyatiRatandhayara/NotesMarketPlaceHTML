@@ -91,7 +91,7 @@ if(isset($_SESSION['email'])){
                   
 
                    <?php 
-                                 $query_review_customer=mysqli_query($conn,"SELECT * FROM sellernotesreviews WHERE Seller_note_id=$seller_id AND ReviewedByID=$review_user_id");
+                                 $query_review_customer=mysqli_query($conn,"SELECT * FROM sellernotesreviews WHERE Seller_note_id=$seller_id AND ReviewedByID=$review_user_id AND IsActive=1");
                                  while($row=mysqli_fetch_assoc($query_review_customer)){
                                  $review_rate = $row['Rating'];
                                  $comment =$row['Comments'];     
