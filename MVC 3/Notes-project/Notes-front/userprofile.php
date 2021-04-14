@@ -1,6 +1,7 @@
 <?php
 include "connection.php"; 
 session_start();
+$message_phone = true;
 if(isset($_SESSION['email'])){
     
     $email = "";
@@ -72,12 +73,13 @@ if($id_count>0){
     while($row=mysqli_fetch_assoc($query_path_fetch)){
        $profile_path = $row['ProfilePicture']; 
     }    
-        
+     if(!(is_numeric($phoneno))){
+        $message_phone = false; 
+    }
+     else{   
     $query_update = "UPDATE userprofile SET DOB='$dob',Gender=$gender,SecondaryEmail='$email',Phonenumber_Countrycode=$countrycode,PhoneNumber='$phoneno',AddressLine1='$address1',AddressLine2='$address2',City='$city',State='$state',ZipCode='$zipcode',Country=$country,University='$university',College='$college' WHERE User_id=$user_id";
     $result_update = mysqli_query($conn,$query_update);
-    if(!$result_update){
-        die("failed".mysqli_error($conn));
-    }
+     }
    $files1 =$_FILES['profile_pic'];
         
     $filename1 =$files1['name'];
@@ -111,12 +113,6 @@ if($id_count>0){
         
     $query_update_users="UPDATE users SET FirstName='$firstname',LastName='$lastname' WHERE User_id=$user_id";
     $result_update_users=mysqli_query($conn,$query_update_users);
-    if(!$result_update_users){
-        die("failed".mysqli_error($conn));
-    }    
-        
-    
-        
 }
     
  }   
@@ -138,12 +134,16 @@ else if(isset($_POST['submit'])){
     $college = $_POST['college'];
     $display_default_img="../Members/default/DP.jpg";
     
-    
-    $query = "INSERT INTO userprofile(User_id,DOB,Gender,SecondaryEmail,Phonenumber_Countrycode,PhoneNumber,ProfilePicture,	AddressLine1,AddressLine2,City,State,ZipCode,Country,University,College,CreatedDate) VALUES($user_id,'$dob',$gender,'$email',$countrycode,'$phoneno',' $display_default_img','$address1','$address2','$city','$state','$zipcode','$country','$university','$college',NOW())";
-    $result = mysqli_query($conn,$query);
-    if(!$result){
-       die("failed".mysqli_error($conn));
+      if(!(is_numeric($phoneno))){
+        $message_phone = false; 
     }
+     else{
+        $query = "INSERT INTO userprofile(User_id,DOB,Gender,SecondaryEmail,Phonenumber_Countrycode,PhoneNumber,ProfilePicture,	AddressLine1,AddressLine2,City,State,ZipCode,Country,University,College,CreatedDate) VALUES($user_id,'$dob',$gender,'$email',$countrycode,'$phoneno',' $display_default_img','$address1','$address2','$city','$state','$zipcode','$country','$university','$college',NOW())";
+    $result = mysqli_query($conn,$query);                            
+     }
+    header("Refresh:0;");
+    
+    
     
     $files1 =$_FILES['profile_pic'];
 
@@ -245,7 +245,7 @@ else{
 
                     <div class="form-group">
                         <label for="email">Email<span class="required">*</span></label>
-                        <input type="email" class="form-control" id="email" value="<?php echo $email?>" name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                        <input type="email" class="form-control" id="email" value="<?php echo $email?>" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label for="gender">Gender</label>
@@ -282,17 +282,12 @@ else{
                     <div class="form-group">
                         <label>Profile Picture</label>
                         <div class="picture">
-                            <label for="file-input">
+                            <label for="file-input1">
                                 <img src="image/Add-notes/upload-file.png">
                             </label>
-                            <input id="file-input" type="file" name="profile_pic">
-                             <div class="incorrect">
-                                <?php
-                        if($valid_1 == false){
-                            echo "only JPEG,JPG and PNG should be supported";
-                        }
-                        ?>
-                            </div>
+                            <input id="file-input1" type="file" name="profile_pic">
+                            <div id="profile_pic_name"></div>
+                             
                         </div>
                     </div>
                 </div>
@@ -306,7 +301,7 @@ else{
                     </div>
                     <div class="form-group">
                         <label for="dob">Date Of Birth</label>
-                        <input type="date" class="form-control" id="dob" name="dob" value=<?php echo $dob; ?> placeholder="Enter Your Date Of Birth">
+                        <input type="date" class="form-control" id="dob" name="dob" value='<?php echo $dob; ?>' placeholder="Enter Your Date Of Birth">
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-5">
@@ -346,7 +341,14 @@ else{
                         <div class="col-lg-8 col-md-8 col-sm-8 col-7">
                             <div class="form-group">
                                 <label for="phone"><br></label>
-                                <input type="tel" class="form-control" id="phone" name="phoneno" value="<?php echo $phoneno?>" placeholder="phone no.">
+                                <input type="tel" class="form-control" id="phone" name="phoneno" value="<?php echo $phoneno ?>" placeholder="phone no." maxlength="10">
+                                <div class="incorrect">
+                            <?php
+                                if($message_phone == false){
+                                    echo "only digits are allowed";
+                                }
+                                ?>   
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -467,12 +469,27 @@ else{
 
     <!--custom jquery-->
     <script src="javascript/jquery.min.js"></script>
+    <!-- display src path of img -->
+    <script>
+        var input1 = document.getElementById("file-input1");
+        var infoArea1 = document.getElementById("profile_pic_name");
+        input1.addEventListener("change", showProfileName1);
+
+        function showProfileName1(event) {
+            var input1 = event.srcElement;
+            var fileName1 = input1.files[0].name;
+            infoArea1.textContent = "File name: " + fileName1;
+        }
+    </script>
 
     <!--bootstrap-->
     <script src="javascript/bootstrap/bootstrap.min.js"></script>
     
      <!--script js-->
     <script src="javascript/script.js"></script>
+    
+   
+    
 </body>
 
 </html>
