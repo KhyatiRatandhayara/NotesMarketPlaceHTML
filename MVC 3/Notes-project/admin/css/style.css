@@ -233,7 +233,7 @@ section {
     border-radius: 3px;
 }
 .picture-2>input {
-  opacity: 0;
+  display: none;
 }
 .picture-2 img{
     margin: 25px 0 0 250px;
