@@ -1,28 +1,53 @@
 <?php
 include "connection.php";
 $query_support_email = mysqli_query($conn,"SELECT * FROM system_configuration WHERE ConfigKey='SE'");
+while($row=mysqli_fetch_assoc($query_support_email)){
+    $support_mail = $row['Value'];
+}
 $count_support_email = mysqli_num_rows($query_support_email);
 
 $query_phone_no = mysqli_query($conn,"SELECT * FROM system_configuration WHERE ConfigKey='PN'");
 $count_phone_no = mysqli_num_rows($query_phone_no);
+while($row=mysqli_fetch_assoc($query_phone_no)){
+    $phone_num = $row['Value'];
+}
 
 $query_email = mysqli_query($conn,"SELECT * FROM system_configuration WHERE ConfigKey='E'");
 $count_email = mysqli_num_rows($query_email);
+while($row=mysqli_fetch_assoc($query_email)){
+    $email_id = $row['Value'];
+}
+
 
 $query_facebook = mysqli_query($conn,"SELECT * FROM system_configuration WHERE ConfigKey='FB'");
 $count_facebook = mysqli_num_rows($query_facebook);
+while($row=mysqli_fetch_assoc($query_facebook)){
+    $facebook = $row['Value'];
+}
 
 $query_twitter = mysqli_query($conn,"SELECT * FROM system_configuration WHERE ConfigKey='TW'");
 $count_twitter = mysqli_num_rows($query_twitter);
+while($row=mysqli_fetch_assoc($query_twitter)){
+    $twitter = $row['Value'];
+}
 
 $query_linkedin = mysqli_query($conn,"SELECT * FROM system_configuration WHERE ConfigKey='LI'");
 $count_linkedin  = mysqli_num_rows($query_linkedin);
+while($row=mysqli_fetch_assoc($query_linkedin)){
+    $linkedin = $row['Value'];
+}
 
 $query_note_upload = mysqli_query($conn,"SELECT * FROM system_configuration WHERE ConfigKey='NU'");
 $count_note_upload  = mysqli_num_rows($query_note_upload);
+while($row=mysqli_fetch_assoc($query_note_upload)){
+    $note_upload = $row['Value'];
+}
 
 $query_display_pic = mysqli_query($conn,"SELECT * FROM system_configuration WHERE ConfigKey='DP'");
 $count_display_pic  = mysqli_num_rows($query_display_pic);
+while($row=mysqli_fetch_assoc($query_display_pic)){
+    $display = $row['Value'];
+}
 
 if(isset($_POST['submit'])){
      $support_email = $_POST['supportemail'];
@@ -171,9 +196,10 @@ if(isset($_POST['submit'])){
 </head>
 
 <body>
-  <?php
+<?php 
     include "admin-header.php";
     ?>
+ 
    
     <form method="post" enctype="multipart/form-data">
     <div class="bottom-footer">
@@ -189,27 +215,27 @@ if(isset($_POST['submit'])){
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                         <div class="form-group">
                             <label for="email">Support emails address<span class="required">*</span></label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"  required name="supportemail">
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"  required name="supportemail" value="<?php echo $support_mail ?>">
                         </div>
                         <div class="form-group">
                             <label for="phone">Support phone number<span class="required">*</span></label>
-                            <input type="tel" class="form-control" id="phone" placeholder="enter phone number" name="phoneno" required>
+                            <input type="tel" class="form-control" id="phone" placeholder="enter phone number" value="<?php echo $phone_num ?>" name="phoneno">
                         </div>
                         <div class="form-group">
                             <label for="email">Emails Address(es) (for various events system will send notifications to these userd)<span class="required">*</span></label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your email address" name="email" required>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your email address" name="email" value="<?php echo $email_id ?>">
                         </div>
                         <div class="form-group">
                             <label for="facebook">Facebook URL</label>
-                            <input type="text" class="form-control" id="facebook" placeholder="Enter facebook url" name="facebook">
+                            <input type="text" class="form-control" id="facebook" placeholder="Enter facebook url" name="facebook" value="<?php echo $facebook ?>">
                         </div>
                         <div class="form-group">
                             <label for="twitter">Twitter URL</label>
-                            <input type="text" class="form-control" id="twitter" placeholder="Enter twitter url" name="twitter">
+                            <input type="text" class="form-control" id="twitter" placeholder="Enter twitter url" name="twitter" value="<?php echo $twitter ?>">
                         </div>
                         <div class="form-group">
                             <label for="linkedin">Linkedin URL</label>
-                            <input type="text" class="form-control" id="linkedin" placeholder="Enter linkedin url" name="linkedin">
+                            <input type="text" class="form-control" id="linkedin" placeholder="Enter linkedin url" name="linkedin" value="<?php echo $linkedin ?>">
                         </div>
 
                         <div class="form-group">
@@ -218,7 +244,8 @@ if(isset($_POST['submit'])){
                                 <label for="file-input">
                                     <img src="image/myprofile/upload-file.png">
                                 </label>
-                                <input id="file-input" type="file" name="note_upload">
+                                <input id="file-input" type="file" name="note_upload" value="<?php echo $note_upload ?>">
+                                <div id="note_name" style="margin-top:-35px"></div>
                             </div>
                         </div>
 
@@ -228,7 +255,8 @@ if(isset($_POST['submit'])){
                                 <label for="file-input-display">
                                     <img src="image/myprofile/upload-file.png">
                                 </label>
-                                <input id="file-input-display" type="file" name="profile_picture">
+                                <input id="file-input-display" type="file" name="profile_picture" value="<?php echo $display ?>">
+                                <div id="display_name" style="margin-top:-35px"></div>
                             </div>
                         </div>
                         
@@ -252,6 +280,27 @@ if(isset($_POST['submit'])){
 
     <!--custom jquery-->
     <script src="javascript/jquery.min.js"></script>
+    <script>
+        var input1 = document.getElementById("file-input");
+        var infoArea1 = document.getElementById("note_name");
+        input1.addEventListener("change", showProfileName1);
+
+        function showProfileName1(event) {
+            var input1 = event.srcElement;
+            var fileName1 = input1.files[0].name;
+            infoArea1.textContent = "File name: " + fileName1;
+        }
+        
+         var input3 = document.getElementById("file-input-display");
+        var infoArea3 = document.getElementById("display_name");
+        input3.addEventListener("change", showProfileName3);
+
+        function showProfileName3(event) {
+            var input3 = event.srcElement;
+            var fileName3 = input3.files[0].name;
+            infoArea3.textContent = "File name: " + fileName3;
+        }
+    </script>
 
     <!--bootstrap-->
     <script src="javascript/bootstrap/bootstrap.min.js"></script>
