@@ -52,7 +52,7 @@ include "connection.php";
     
                        
     
-                        if($count > 0){
+                        if(!empty($profile_pic) && $profile_pic != " "){
                          echo " <img src='$profile_pic' alt='user' class='img-fluid' style='margin-top: 10px;width:40px; height:40px; border-radius:50%'>";   
                         } 
                          else{
