@@ -163,12 +163,12 @@ $row_db = mysqli_fetch_row($pagination_result);
                      
                     <?php 
                         $avg_rate=0;
-                    $query_avg=mysqli_query($conn,"SELECT AVG(Rating) FROM sellernotesreviews WHERE Seller_note_id=$seller_note_id");
+                    $query_avg=mysqli_query($conn,"SELECT AVG(Rating) FROM sellernotesreviews WHERE Seller_note_id=$seller_note_id AND IsActive=1");
                         while($row=mysqli_fetch_assoc($query_avg)){
                             $avg_rate = $row['AVG(Rating)'];
                         }
                       
-                      $query_count = mysqli_query($conn,"SELECT * FROM sellernotesreviews WHERE Seller_note_id=$seller_note_id"); 
+                      $query_count = mysqli_query($conn,"SELECT * FROM sellernotesreviews WHERE Seller_note_id=$seller_note_id AND IsActive=1"); 
                       $total_count = mysqli_num_rows($query_count);
                        
                        
