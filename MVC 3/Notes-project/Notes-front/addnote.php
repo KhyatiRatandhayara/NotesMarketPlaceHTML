@@ -455,6 +455,7 @@ header("location:login.php");
                                     <img src="image/Add-notes/upload-file.png">
                                 </label>
                                 <input id="file-input-3" type="file" name="displaypicture">
+                                <div id="display_pic_name" style="margin-top:-35px"></div>
                             </div>
                             <div class="incorrect">
                                 <?php
@@ -506,8 +507,6 @@ header("location:login.php");
 
                                 <?php
                              if(isset($_GET['id'])){
-                               // echo "<option selected value='$category'>$category_name_fetch</option>";
-                                 
                                   $query_category = "select * from note_categories WHERE IsActive=1";
                                   $result_category = mysqli_query($conn, $query_category);
                                  
@@ -706,6 +705,7 @@ header("location:login.php");
                                     <img src="image/Add-notes/upload-file.png">
                                 </label>
                                 <input id="file-input-1" type="file" name="note-preview">
+                                <div id="note_preview_name" style="margin-top:-35px"></div>
                             </div>
                             <div class="incorrect">
                                 <?php
@@ -761,6 +761,29 @@ header("location:login.php");
 
     <!--custom jquery-->
     <script src="javascript/jquery.min.js"></script>
+    
+    <!-- display src path of img -->
+    <script>
+        var input3 = document.getElementById("file-input-3");
+        var infoArea3 = document.getElementById("display_pic_name");
+        input3.addEventListener("change", showProfileName3);
+
+        function showProfileName3(event) {
+            var input3 = event.srcElement;
+            var fileName3 = input3.files[0].name;
+            infoArea3.textContent = "File name: " + fileName3;
+        }
+        
+         var input1 = document.getElementById("file-input-1");
+        var infoArea1 = document.getElementById("note_preview_name");
+        input1.addEventListener("change", showProfileName1);
+
+        function showProfileName1(event) {
+            var input1 = event.srcElement;
+            var fileName1 = input1.files[0].name;
+            infoArea1.textContent = "File name: " + fileName1;
+        }
+    </script>
 
     <!--bootstrap-->
     <script src="javascript/bootstrap/bootstrap.min.js"></script>
